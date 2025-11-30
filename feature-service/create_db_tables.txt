@@ -1,0 +1,81 @@
+-- ========== Table 1: min_price_data ==========
+CREATE TABLE x_min_price_data (
+    datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    ticker VARCHAR(100) NOT NULL,
+    price_open NUMERIC(15,6),
+    price_close NUMERIC(15,6),
+    price_high NUMERIC(15,6),
+    price_low NUMERIC(15,6),
+    price_vol NUMERIC(15,6),
+    price_vol_weight_avg NUMERIC(15,6),
+    CONSTRAINT x_min_price_data_pkey PRIMARY KEY (datetime, ticker)
+);
+
+-- ========== Table 2: hour_price_data ==========
+CREATE TABLE x_hour_price_data (
+    datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    ticker VARCHAR(100) NOT NULL,
+    price_open NUMERIC(15,6),
+    price_close NUMERIC(15,6),
+    price_high NUMERIC(15,6),
+    price_low NUMERIC(15,6),
+    price_vol NUMERIC(15,6),
+    price_vol_weight_avg NUMERIC(15,6),
+    CONSTRAINT x_hour_price_data_pkey PRIMARY KEY (datetime, ticker)
+);
+
+-- ========== Table 3: daily_price_data ==========
+CREATE TABLE x_daily_price_data (
+    datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    ticker VARCHAR(100) NOT NULL,
+    price_open NUMERIC(15,6),
+    price_close NUMERIC(15,6),
+    price_high NUMERIC(15,6),
+    price_low NUMERIC(15,6),
+    price_vol NUMERIC(15,6),
+    price_vol_weight_avg NUMERIC(15,6),
+    CONSTRAINT x_daily_price_data_pkey PRIMARY KEY (datetime, ticker)
+);
+
+-- ========== Table 4: daily_feature_data (independent) ==========
+CREATE TABLE daily_feature_data (
+    daily_datetime_id TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    real_gdp_quarterly NUMERIC(15,6),
+    real_gdp_per_capita_quarterly NUMERIC(15,6),
+    treasury_yield_3m_daily NUMERIC(15,6),
+    treasury_yield_2y_daily NUMERIC(15,6),
+    treasury_yield_5y_daily NUMERIC(15,6),
+    treasury_yield_7y_daily NUMERIC(15,6),
+    treasury_yield_10y_daily NUMERIC(15,6),
+    treasury_yield_30y_daily NUMERIC(15,6),
+    federal_funds_daily NUMERIC(15,6),
+    cpi_monthly NUMERIC(15,6),
+    inflation_yearly NUMERIC(15,6),
+    retail_sales_monthly NUMERIC(15,6),
+    durables_monthly NUMERIC(15,6),
+    unemployment_monthy NUMERIC(15,6),         -- note: typo kept as requested
+    nonfarm_payroll_monthly NUMERIC(15,6),
+    crude_oil_prices_wti_daily NUMERIC(15,6),
+    crude_oil_prices_brent_daily NUMERIC(15,6),
+    natural_gas_daily NUMERIC(15,6),
+    copper_monthly NUMERIC(15,6),
+    aluminum_monthly NUMERIC(15,6),
+    wheat_monthly NUMERIC(15,6),
+    corn_monthly NUMERIC(15,6),
+    cotten_monthly NUMERIC(15,6),              -- note: typo kept as requested
+    sugar_monthly NUMERIC(15,6),
+    coffee_monthly NUMERIC(15,6),
+    global_commodity_index_monthly NUMERIC(15,6),
+    eur_usd_daily NUMERIC(15,6),
+    jpy_usd_daily NUMERIC(15,6),
+    gbp_usd_daily NUMERIC(15,6),
+    cad_usd_daily NUMERIC(15,6),
+    sek_usd_daily NUMERIC(15,6),
+    chf_usd_daily NUMERIC(15,6),
+    brl_usd_daily NUMERIC(15,6),
+    rub_usd_daily NUMERIC(15,6),
+    inr_usd_daily NUMERIC(15,6),
+    cny_usd_daily NUMERIC(15,6),
+    sar_usd_daily NUMERIC(15,6),
+    CONSTRAINT daily_feature_data_pkey PRIMARY KEY (daily_datetime_id)
+);

@@ -1,0 +1,13 @@
+# ./requirements.txt
+
+Flask==2.3.3
+Flask_Cors==4.0.1
+flask_sqlalchemy==3.1.1
+openai==0.28.0
+pandas==2.3.3
+protobuf==6.32.1
+pytz==2022.7.1
+Requests==2.32.5
+SQLAlchemy==2.0.31
+utils==1.0.2
+psycopg2-binary>=2.9.9
