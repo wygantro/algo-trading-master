@@ -1,0 +1,75 @@
+create table trained_models_info (
+  model_id               bigserial primary key,
+  model_name             text,
+  model_family           text not null,         -- 'xgb', 'lstm', etc
+  asset_symbol           text not null,         -- 'BTCUSD'
+  timeframe              text not null,         -- '5m', '1h'
+  lookahead_bars         int  not null,
+  lookahead_seconds      int,
+
+  feature_set_version    text,
+
+  training_data_start_ts timestamptz,
+  training_data_end_ts   timestamptz,
+
+  training_start_ts      timestamptz,
+  training_end_ts        timestamptz,
+  trained_ts             timestamptz not null default now(),
+
+  accuracy               double precision,      -- store original accuracy here
+  metric_primary_name    text,                  -- e.g. 'rmse'
+  metric_primary_value   double precision,
+
+  artifact_uri           text,
+  training_config_json   jsonb,
+  notes                  text,
+
+  is_active              boolean not null default false,
+  created_ts             timestamptz not null default now(),
+  updated_ts             timestamptz not null default now()
+);
+
+create index idx_trained_models_asset_tf
+  on trained_models_info(asset_symbol, timeframe);
+
+create index idx_trained_models_active
+  on trained_models_info(is_active);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table model_predictions (
+  pred_id                bigserial primary key,
+  prediction_ts          timestamptz not null,
+  model_id               bigint not null references trained_models_info(model_id) on delete cascade,
+
+  asset_symbol           text,
+  timeframe              text,
+
+  input_price            double precision,
+  target_ts              timestamptz,
+  predicted_value        double precision not null,
+
+  predicted_value_low    double precision,
+  predicted_value_high   double precision,
+  prediction_confidence  double precision,
+
+  created_ts             timestamptz not null default now()
+);
+
+create index idx_model_predictions_model_ts
+  on model_predictions(model_id, prediction_ts desc);
+
+create unique index uq_model_predictions_model_prediction_ts
+  on model_predictions(model_id, prediction_ts);
+
