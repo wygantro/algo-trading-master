@@ -18,7 +18,7 @@ params = {
                   'dollar_volume',
                   'buy_trades',
                   'sell_trades',
-                  'total_trades'],
+                  'total_trades',
                   'buy_coin_volume',
                   'sell_coin_volume',
                   'buy_dollar_volume',
